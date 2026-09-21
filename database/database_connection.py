@@ -1,4 +1,4 @@
-## from database_connection import database_connect
+## from database_connection import database_connect - käyttäkää tätä kun kutsutte sitä saatanan tietokantaa
 
 import mysql.connector
 

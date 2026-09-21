@@ -1,19 +1,25 @@
 -- --------------------------------------------------------
 -- Verkkotietokone:              127.0.0.1
--- Palvelinversio:               10.9.2-MariaDB - mariadb.org binary distribution
+-- Palvelinversio:               12.3.2-MariaDB - MariaDB Server
 -- Server OS:                    Win64
--- HeidiSQL Versio:              11.3.0.6295
+-- HeidiSQL Versio:              12.17.0.7270
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET NAMES utf8 */;
 /*!50503 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+
+-- Dumping database structure for flight_game
+CREATE DATABASE IF NOT EXISTS `flight_game` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_uca1400_ai_ci */;
+USE `flight_game`;
+
 -- Dumping structure for taulu flight_game.airport
-DROP TABLE IF EXISTS `airport`;
 CREATE TABLE IF NOT EXISTS `airport` (
   `id` int(11) NOT NULL,
   `ident` varchar(40) NOT NULL,
@@ -33,11 +39,12 @@ CREATE TABLE IF NOT EXISTS `airport` (
   `home_link` varchar(40) DEFAULT NULL,
   `wikipedia_link` varchar(40) DEFAULT NULL,
   `keywords` varchar(40) DEFAULT NULL,
-  PRIMARY KEY (`ident`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`ident`),
+  KEY `iso_country` (`iso_country`),
+  CONSTRAINT `airport_ibfk_1` FOREIGN KEY (`iso_country`) REFERENCES `country` (`iso_country`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
--- Dumping data for table flight_game.airport: ~6 899 rows (suunnilleen)
-/*!40000 ALTER TABLE `airport` DISABLE KEYS */;
+-- Dumping data for table flight_game.airport: ~70 610 rows (suunnilleen)
 INSERT INTO `airport` (`id`, `ident`, `type`, `name`, `latitude_deg`, `longitude_deg`, `elevation_ft`, `continent`, `iso_country`, `iso_region`, `municipality`, `scheduled_service`, `gps_code`, `iata_code`, `local_code`, `home_link`, `wikipedia_link`, `keywords`) VALUES
 	(6523, '00A', 'heliport', 'Total Rf Heliport', 40.07080078125, -74.93360137939453, 11, 'NA', 'US', 'US-PA', 'Bensalem', 'no', '00A', '', '00A', '', '', ''),
 	(323361, '00AA', 'small_airport', 'Aero B Ranch Airport', 38.704022, -101.473911, 3435, 'NA', 'US', 'US-KS', 'Leoti', 'no', '00AA', '', '00AA', '', '', ''),
@@ -5598,9 +5605,9 @@ INSERT INTO `airport` (`id`, `ident`, `type`, `name`, `latitude_deg`, `longitude
 	(11458, '4IL2', 'small_airport', 'Wayne Ziller Jr Airport', 40.80839920043945, -88.54170227050781, 661, 'NA', 'US', 'US-IL', 'Fairbury', 'no', '4IL2', '', '4IL2', '', '', ''),
 	(11459, '4IL3', 'small_airport', 'Thrifty Acres Airport', 42.142987, -89.228468, 725, 'NA', 'US', 'US-IL', 'Stillman Valley', 'no', '4IL3', '', '4IL3', '', '', ''),
 	(11460, '4IL4', 'small_airport', 'Kuebler RLA Restricted Landing Area', 39.0564002991, -88.8161010742, 620, 'NA', 'US', 'US-IL', 'St Elmo', 'no', '4IL4', '', '4IL4', '', '', ''),
-	(11461, '4IL5', 'small_airport', 'Frank\'s Flying Service Airport', 41.724998474121094, -90.00509643554688, 600, 'NA', 'US', 'US-IL', 'Morrison', 'no', '4IL5', '', '4IL5', '', '', ''),
-	(11462, '4IL6', 'closed', 'Keim Heliport', 41.912498, -88.158997, 795, 'NA', 'US', 'US-IL', 'West Chicago', 'no', '', '', '', '', '', '4IL6');
+	(11461, '4IL5', 'small_airport', 'Frank\'s Flying Service Airport', 41.724998474121094, -90.00509643554688, 600, 'NA', 'US', 'US-IL', 'Morrison', 'no', '4IL5', '', '4IL5', '', '', '');
 INSERT INTO `airport` (`id`, `ident`, `type`, `name`, `latitude_deg`, `longitude_deg`, `elevation_ft`, `continent`, `iso_country`, `iso_region`, `municipality`, `scheduled_service`, `gps_code`, `iata_code`, `local_code`, `home_link`, `wikipedia_link`, `keywords`) VALUES
+	(11462, '4IL6', 'closed', 'Keim Heliport', 41.912498, -88.158997, 795, 'NA', 'US', 'US-IL', 'West Chicago', 'no', '', '', '', '', '', '4IL6'),
 	(11463, '4IL7', 'heliport', 'Brussels Heliport', 38.94580078125, -90.58719635009766, 515, 'NA', 'US', 'US-IL', 'Brussels', 'no', '4IL7', '', '4IL7', '', '', ''),
 	(11464, '4IL8', 'small_airport', 'Rendleman Airport', 37.75630187988281, -89.38330078125, 500, 'NA', 'US', 'US-IL', 'Murphysboro', 'no', '4IL8', '', '4IL8', '', '', ''),
 	(11465, '4IL9', 'small_airport', 'Unzicker Airport', 40.82749938964844, -89.12079620361328, 745, 'NA', 'US', 'US-IL', 'Benson', 'no', '4IL9', '', '4IL9', '', '', ''),
@@ -11160,9 +11167,9 @@ INSERT INTO `airport` (`id`, `ident`, `type`, `name`, `latitude_deg`, `longitude
 	(16122, 'AK28', 'small_airport', 'Chena Marina Airport', 64.81400299072266, -147.91900634765625, 427, 'NA', 'US', 'US-AK', 'Fairbanks', 'no', 'AK28', '', 'AK28', '', '', ''),
 	(16123, 'AK29', 'small_airport', 'Reids Landing Airport', 61.61259841918945, -149.8520050048828, 246, 'NA', 'US', 'US-AK', 'Houston', 'no', 'AK29', '', 'AK29', '', '', ''),
 	(45265, 'AK30', 'small_airport', 'Strawberry Point Airport', 60.391153, -146.097464, 50, 'NA', 'US', 'US-AK', 'Cordova', 'no', 'AK30', '', 'AK30', '', '', ''),
-	(16124, 'AK31', 'small_airport', 'Swift Creek Airport', 61.41120147705078, -143.00100708007812, 1225, 'NA', 'US', 'US-AK', 'Mccarthy', 'no', 'AK31', '', 'AK31', '', '', ''),
-	(45258, 'AK32', 'heliport', 'Oooguruk Island Heliport', 70.495422, -150.253467, 27, 'NA', 'US', 'US-AK', 'Nuiqsut', 'no', 'PFNU', '', 'AK32', '', '', '');
+	(16124, 'AK31', 'small_airport', 'Swift Creek Airport', 61.41120147705078, -143.00100708007812, 1225, 'NA', 'US', 'US-AK', 'Mccarthy', 'no', 'AK31', '', 'AK31', '', '', '');
 INSERT INTO `airport` (`id`, `ident`, `type`, `name`, `latitude_deg`, `longitude_deg`, `elevation_ft`, `continent`, `iso_country`, `iso_region`, `municipality`, `scheduled_service`, `gps_code`, `iata_code`, `local_code`, `home_link`, `wikipedia_link`, `keywords`) VALUES
+	(45258, 'AK32', 'heliport', 'Oooguruk Island Heliport', 70.495422, -150.253467, 27, 'NA', 'US', 'US-AK', 'Nuiqsut', 'no', 'PFNU', '', 'AK32', '', '', ''),
 	(16125, 'AK33', 'small_airport', 'Herendeen Bay Airport', 55.801399231, -160.899002075, 20, 'NA', 'US', 'US-AK', 'Herendeen Bay', 'no', 'AK33', 'HED', 'AK33', '', '', ''),
 	(16126, 'AK34', 'seaplane_base', 'Kashwitna Lake Seaplane Base', 61.8353004456, -150.080001831, 186, 'NA', 'US', 'US-AK', 'Willow', 'no', 'AK34', '', 'AK34', '', '', ''),
 	(16127, 'AK35', 'heliport', 'Buffalo Row Heliport', 64.0389022827, -145.738998413, 1180, 'NA', 'US', 'US-AK', 'Delta Junction', 'no', 'AK35', '', 'AK35', '', '', ''),
@@ -70993,10 +71000,8 @@ INSERT INTO `airport` (`id`, `ident`, `type`, `name`, `latitude_deg`, `longitude
 	(346788, 'ZZ-0003', 'small_airport', 'Fainting Goat Airport', 32.110587, -97.356312, 690, 'NA', 'US', 'US-TX', 'Blum', 'no', '87TX', '', '87TX', '', '', ''),
 	(342102, 'ZZZW', 'closed', 'Scandium City Heliport', 69.355287, -138.93931, 4, 'NA', 'CA', 'CA-YT', '(Old) Scandium City', 'no', 'ZZZW', 'ZYW', 'YK96', '', '', ''),
 	(313629, 'ZZZZ', 'small_airport', 'Satsuma I?jima Airport', 30.784722, 130.270556, 338, 'AS', 'JP', 'JP-46', 'Mishima', 'no', 'RJX7', '', 'RJX7', '', 'http://wikimapia.org/6705190/Satsuma-Iwo', 'SATSUMA,IWOJIMA,RJX7');
-/*!40000 ALTER TABLE `airport` ENABLE KEYS */;
 
 -- Dumping structure for taulu flight_game.country
-DROP TABLE IF EXISTS `country`;
 CREATE TABLE IF NOT EXISTS `country` (
   `iso_country` varchar(40) NOT NULL,
   `name` varchar(40) DEFAULT NULL,
@@ -71004,10 +71009,9 @@ CREATE TABLE IF NOT EXISTS `country` (
   `wikipedia_link` varchar(40) DEFAULT NULL,
   `keywords` varchar(40) DEFAULT NULL,
   PRIMARY KEY (`iso_country`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- Dumping data for table flight_game.country: ~248 rows (suunnilleen)
-/*!40000 ALTER TABLE `country` DISABLE KEYS */;
 INSERT INTO `country` (`iso_country`, `name`, `continent`, `wikipedia_link`, `keywords`) VALUES
 	('AD', 'Andorra', 'EU', 'https://en.wikipedia.org/wiki/Andorra', '\r'),
 	('AE', 'United Arab Emirates', 'AS', 'https://en.wikipedia.org/wiki/United_Ara', 'UAE'),
@@ -71257,8 +71261,58 @@ INSERT INTO `country` (`iso_country`, `name`, `continent`, `wikipedia_link`, `ke
 	('ZM', 'Zambia', 'AF', 'https://en.wikipedia.org/wiki/Zambia', '\r'),
 	('ZW', 'Zimbabwe', 'AF', 'https://en.wikipedia.org/wiki/Zimbabwe', '\r'),
 	('ZZ', 'Unknown or unassigned country', 'AF', 'https://en.wikipedia.org/wiki/Unknown_or', '\r');
-/*!40000 ALTER TABLE `country` ENABLE KEYS */;
 
+-- Dumping structure for taulu flight_game.game
+CREATE TABLE IF NOT EXISTS `game` (
+  `id` varchar(40) NOT NULL,
+  `co2_consumed` int(8) DEFAULT NULL,
+  `co2_budget` int(8) DEFAULT NULL,
+  `location` varchar(10) DEFAULT NULL,
+  `screen_name` varchar(40) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `location` (`location`),
+  CONSTRAINT `game_ibfk_1` FOREIGN KEY (`location`) REFERENCES `airport` (`ident`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- Dumping data for table flight_game.game: ~3 rows (suunnilleen)
+
+-- Dumping structure for taulu flight_game.goal
+CREATE TABLE IF NOT EXISTS `goal` (
+  `id` int(11) NOT NULL,
+  `name` varchar(40) DEFAULT NULL,
+  `description` varchar(200) DEFAULT NULL,
+  `icon` varchar(8) DEFAULT NULL,
+  `target` varchar(40) DEFAULT NULL,
+  `target_minvalue` decimal(8,2) DEFAULT NULL,
+  `target_maxvalue` decimal(8,2) DEFAULT NULL,
+  `target_text` varchar(40) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- Dumping data for table flight_game.goal: ~8 rows (suunnilleen)
+INSERT INTO `goal` (`id`, `name`, `description`, `icon`, `target`, `target_minvalue`, `target_maxvalue`, `target_text`) VALUES
+	(1, 'HOT', 'Temperature over +25C', '01d', 'TEMP', 25.00, 9999.00, NULL),
+	(2, 'COLD', 'Temperature under -20C', '13d', 'TEMP', -9999.00, -20.00, NULL),
+	(3, '0DEG', 'Temperature exactly 0C', '04d', 'TEMP', -0.50, 0.50, NULL),
+	(4, '10DEG', 'Temperature exactly +10C', '04d', 'TEMP', 9.50, 10.50, NULL),
+	(5, '20DEG', 'Temperature exactly +20C', '04d', 'TEMP', 19.50, 20.50, NULL),
+	(6, 'CLEAR', 'Clear skies', '01d', 'WEATHER', NULL, NULL, 'Clear'),
+	(7, 'CLOUDS', 'Cloudy', '04d', 'WEATHER', NULL, NULL, 'Clouds'),
+	(8, 'WINDY', 'Wind blows more than 10 m/s', '04d', 'WIND', 10.00, 9999.00, NULL);
+
+-- Dumping structure for taulu flight_game.goal_reached
+CREATE TABLE IF NOT EXISTS `goal_reached` (
+  `game_id` varchar(40) NOT NULL,
+  `goal_id` int(11) NOT NULL,
+  PRIMARY KEY (`game_id`,`goal_id`),
+  KEY `goalid` (`goal_id`),
+  CONSTRAINT `goal_reached_ibfk_1` FOREIGN KEY (`game_id`) REFERENCES `game` (`id`),
+  CONSTRAINT `goal_reached_ibfk_2` FOREIGN KEY (`goal_id`) REFERENCES `goal` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- Dumping data for table flight_game.goal_reached: ~4 rows (suunnilleen)
+
+/*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

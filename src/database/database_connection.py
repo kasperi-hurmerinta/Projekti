@@ -10,4 +10,4 @@ def database_connect():
         database="flight_game"
     )
 
-# Käyttäisin itseasiassa dotenv kirjastoa, mutta koska tämä on koulu projekti niin pidetään tämä yksinkertaisena.
+# Käyttäisin itseasiassa dotenv kirjastoa, mutta koska tämä on koulu projekti niin pidetään tämä yksinkertaisena. - Daniel

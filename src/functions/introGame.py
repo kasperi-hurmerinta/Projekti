@@ -30,5 +30,7 @@ def intro_game():
     print("Kello on 7.32, ja portti sulkeutuu 7.45!")
     sleep(3)
     print("Nyt pitää mennä, on kiire!")
+    
+    # Kun mä testailin tätä projektii pikkasen, niin toi sleep(3) on vähä liian pitkä. Kanttii varmaan pistää sleep(1.5), ainakin kokeiluun, kattokaa ite, ei mul o välii - Daniel
 
     new_game()

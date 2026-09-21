@@ -4,8 +4,10 @@ import mysql.connector
 
 def database_connect():
     return mysql.connector.connect(
-        host="192.168.1.7",
-        user="python",
-        password="Python",
+        host="localhost",
+        user="root",
+        password="Metropolia!",
         database="flight_game"
     )
+
+# Käyttäisin itseasiassa dotenv kirjastoa, mutta koska tämä on koulu projekti niin pidetään tämä yksinkertaisena.

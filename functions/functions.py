@@ -61,6 +61,14 @@ def intro_game():
     '''
 
     print(lentokentta)
-    print("Uhhh... Heräät darrasta! Missä minä olen?")
-    sleep(5)
-    print("Nyt pitää mennä on kiire!")
+    print("Uhhh... Päätä jomottaa kuin joku löisi sitä vasaralla.")
+    sleep(3)
+    print("Avaat silmäsi. Makaat kovalla penkillä keskellä lentokenttää!")
+    sleep(3)
+    print("Missä minä olen? Kädessäsi on viinapullo.")
+    sleep(3)
+    print("Kello on 7.32, ja portti sulkeutuu 7.45!")
+    sleep(3)
+    print("Nyt pitää mennä, on kiire!")
+
+    new_game()

@@ -8,4 +8,4 @@ def instructions_game():
     else:
         print("Lue ohjeet huolellisesti ennen kuin jatkat.")
         instructions_game()
-    #Ohjeitten jälkeen voisi kutsua uudestaan main_screen() funktiota kun hän sitä haluaa. Eli kysytään inputilla haluaako hän palata päävalikkoon. Jotain tyyliin "Oletko lukenut ohjeet?: Y/N"
+    #Ohjeitten jälkeen voisi kutsua uudestaan main_screen() funktiota kun hän sitä haluaa. Eli kysytään inputilla haluaako hän palata päävalikkoon. Jotain tyyliin "Oletko lukenut ohjeet?: Y/N" - Daniel

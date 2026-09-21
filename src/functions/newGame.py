@@ -1,6 +1,6 @@
 from database.database_connection import database_connect as connection
 from functions.loadGame import load_game
-import player # Tämä tekee muuttujista globaallisia, eli tämän avulla pelaajan nimi voidaan tallentaa ja käyttää myöhemmin pelin aikana.
+import player # Tämä tekee muuttujista globaallisia, eli tämän avulla pelaajan nimi voidaan tallentaa ja käyttää myöhemmin pelin aikana. - Daniel
 
 def new_game():
     connect = connection()

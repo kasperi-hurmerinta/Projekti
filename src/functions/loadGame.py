@@ -1,9 +1,10 @@
 from database.database_connection import database_connect as connection
-import player
+from main.player import Player
 
 def load_game():
+    screen_name = input("Anna pelaaja nimesi: ")
     connect = connection()
-    check_sql = f"SELECT screen_name FROM game WHERE screen_name = '{player.current_player.screen_name}'"
+    check_sql = f"SELECT screen_name FROM game WHERE screen_name = '{screen_name}'"
     cursor = connect.cursor()
     cursor.execute(check_sql)
     result = cursor.fetchone()
@@ -11,7 +12,9 @@ def load_game():
     connect.close()
 
     if not result:
-        print(f"virhe: nimi {player.current_player.screen_name} ei ole olemassa")
+        print(f"virhe: nimi {screen_name} on virheellinen!")
         return
-    
-    print(f"Testi: {player.current_player.screen_name}")
+
+    Player.current_player = Player(screen_name, cursor.lastrowid)
+
+    print(f"Testi: {screen_name}")

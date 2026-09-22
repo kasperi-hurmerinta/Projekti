@@ -11,7 +11,7 @@ def load_game():
     connect.close()
 
     if not result:
-        print(f"virhe: nimi {player.current_player.screen_name} ei ole olemassa")
+        print(f"virhe: nimi {player.current_player.screen_name} on virheellinen!")
         return
     
     print(f"Testi: {player.current_player.screen_name}")

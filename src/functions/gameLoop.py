@@ -2,10 +2,11 @@ from database.database_connection import database_connect as connection
 from main.player import Player
 from flightRoutes import *
 import random
+pelaajan_nimi = Player.current_player.screen_name
 
 def tarkista_pisteet():
     connect = connection()
-    check_sql = f"SELECT pisteet FROM game WHERE screen_name = '{Player.current_player.screen_name}'"
+    check_sql = f"SELECT pisteet FROM game WHERE screen_name = '{pelaajan_nimi}'"
     cursor = connect.cursor()
     cursor.execute(check_sql)
     result = cursor.fetchone()
@@ -59,7 +60,6 @@ def game_loop():
     kolmas_pysakki = arvo_kohteet[1]
 
     ensimmainen_lentokentta = "Helsinki-Vantaa Lentokenttä"
-    pelaajan_nimi = Player.current_player.screen_name
 
     while True:
         flight_panel()

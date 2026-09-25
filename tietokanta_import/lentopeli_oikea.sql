@@ -71267,6 +71267,7 @@ CREATE TABLE IF NOT EXISTS `game` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `location` varchar(10) DEFAULT NULL,
   `screen_name` varchar(40) DEFAULT NULL,
+  `pisteet` INT NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   KEY `location` (`location`),
   CONSTRAINT `game_ibfk_1` FOREIGN KEY (`location`) REFERENCES `airport` (`ident`)

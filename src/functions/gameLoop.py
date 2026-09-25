@@ -38,6 +38,10 @@ def random_destination():
 def game_loop():
     arvo_kohteet = random_destination()
 
+    ensimmainen_pysakki = arvo_kohteet[1]
+    toinen_pysakki = arvo_kohteet[2]
+    kolmas_pysakki = arvo_kohteet[3]
+
     def flight_panel():
         lentotaulu = f"""
     ╔══════════════════════════════════════════════════════════════════════╗
@@ -49,14 +53,10 @@ def game_loop():
     ║ AY 104     ║ Tukholma             ║ 07:38    ║ 12       ║ LÄHTENYT   ║
     ║ FR 219     ║ Lontoo               ║ 08:05    ║ 18       ║ ODOTTAA    ║
     ║ AY 532     ║ Oulu                 ║ 08:21    ║  6       ║ ODOTTAA    ║
-    ║ FI 847     ║ {arvo_kohteet}       ║ 07:45    ║  4       ║ PORTILLA   ║
+    ║ FI 847     ║ {ensimmainen_pysakki}║ 07:45    ║  4       ║ PORTILLA   ║
     ╚════════════╩══════════════════════╩══════════╩══════════╩════════════╝
     """
         return lentotaulu
-
-    ensimmainen_pysakki = arvo_kohteet[1]
-    toinen_pysakki = arvo_kohteet[2]
-    kolmas_pysakki = arvo_kohteet[1]
 
     ensimmainen_lentokentta = "Helsinki-Vantaa Lentokenttä"
     pelaajan_nimi = Player.current_player.screen_name
@@ -69,9 +69,6 @@ def game_loop():
         if lentotaulu_kysymys != 4:
             print("bläh bläh bläh")
             break
-
-
-
 
     if tarkista_pisteet():
         print("bläh bläh bläh")

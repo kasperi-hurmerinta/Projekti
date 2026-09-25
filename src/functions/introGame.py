@@ -1,5 +1,6 @@
 from time import sleep
-from functions.newGame import new_game
+
+from functions.gameLoop import game_loop
 
 def intro_game():
     airport_art = '''
@@ -27,10 +28,10 @@ def intro_game():
     sleep(3)
     print("Missä minä olen? Kädessäsi on viinapullo.")
     sleep(3)
-    print("Kello on 7.32, ja portti sulkeutuu 7.45!")
+    print("Minulla on kiire, pitää äkkiä päästä lennolle! Portti sulkeutuu 12 minuutin päästä.")
     sleep(3)
-    print("Nyt pitää mennä, on kiire!")
+    print("Nyt pitää mennä!")
     
     # Kun mä testailin tätä projektii pikkasen, niin toi sleep(3) on vähä liian pitkä. Kanttii varmaan pistää sleep(1.5), ainakin kokeiluun, kattokaa ite, ei mul o välii - Daniel
 
-    new_game()
+    game_loop()

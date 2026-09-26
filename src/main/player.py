@@ -1,7 +1,7 @@
 current_player = None
 
 class Player:
-    def __init__(self, screen_name, id, score, location):
+    def __init__(self, screen_name, id, score=0, location="EFHK"):
         self.screen_name = screen_name
         self.id = id
         self.score = score

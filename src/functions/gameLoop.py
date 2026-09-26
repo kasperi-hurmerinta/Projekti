@@ -2,6 +2,8 @@ from database.database_connection import database_connect as connection
 from main.player import Player
 from flightRoutes import *
 import random
+from time import sleep
+
 pelaajan_nimi = Player.current_player.screen_name
 
 def tarkista_pisteet():
@@ -55,23 +57,36 @@ def game_loop():
     """
         return lentotaulu
 
-    ensimmainen_pysakki = arvo_kohteet[1]
-    toinen_pysakki = arvo_kohteet[2]
-    kolmas_pysakki = arvo_kohteet[1]
-
-    ensimmainen_lentokentta = "Helsinki-Vantaa Lentokenttä"
+    ensimmainen_lentokentta = "EFHK"
 
     while True:
-        flight_panel()
+        print(flight_panel())
 
         lentotaulu_kysymys = input("Anna portin numero: ")
 
-        if lentotaulu_kysymys != 4:
-            print("bläh bläh bläh")
+        if lentotaulu_kysymys == "4":
+            print("Oikein! Ehdit portille ja pääset koneeseen.")
+            break
+        else:
+            print("Väärä portti. Myöhästyit lennolta.")
             break
 
+    print("Lentokone käynnistää moottorit...")
+    sleep(1.5)
+    print("Lentokone rullaa kiitotielle ja nousee ilmaan!")
 
+    ensimmainen_pysakki = arvo_kohteet[1]
+    print(f"Laskeudut lentoasemalle: {ensimmainen_pysakki}")
+
+    toinen_pysakki = arvo_kohteet[2]
+    print(f"Laskeudut lentoasemalle: {toinen_pysakki}")
+
+    kolmas_pysakki = arvo_kohteet[3]
+    print(f"Laskeudut lentoasemalle: {kolmas_pysakki}")
 
 
     if tarkista_pisteet():
         print("bläh bläh bläh")
+
+## en tiiä oli vähän tylsää niin korjasin vähän tota looppia ei viel kyl tallenna mitään tietokantaan eikä mihinkään
+## lisäksi pysäkit nyt antaa sen lentokentän identin eikä lentokentän nimeä

@@ -27,6 +27,16 @@ class Player:
         connect.commit()
         cursor.close()
         connect.close()
+        
+    def setScore(self):
+        connect = connection()
+        cursor = connect.cursor()
+        pull_score_sql = f"SELECT pisteet FROM game WHERE id = {self.id}"
+        cursor.execute(pull_score_sql)
+        result = cursor.fetchone()
+        cursor.close()
+        connect.close()
+        self.score = result[0] if result else 0
     
     def getScore(self):
         return self.score

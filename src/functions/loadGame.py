@@ -16,5 +16,6 @@ def load_game():
         return
 
     Player.current_player = Player(screen_name, cursor.lastrowid)
+    Player.current_player.setScore()
 
     print(f"Testi: {screen_name}")

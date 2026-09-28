@@ -1,3 +1,5 @@
+import random
+
 EVENTS = {
     "bensa": {
         "kysymys" : "Mitä polttoainetta lentokone käyttää?",
@@ -47,5 +49,7 @@ EVENTS = {
         "tapahtuma_id": 6,
     },
 }
+
+tehtavat_kolme_max = random.sample(list(EVENTS.values()), 3)
 
 ## aloitetaan kuudella tapahtumalla mitä voi tapahtua, lisätään näitä lisää kun peli looppii toimii. - Kasperi

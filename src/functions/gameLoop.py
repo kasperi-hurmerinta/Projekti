@@ -3,34 +3,9 @@ from main.player import Player
 from flightRoutes import *
 import random
 from time import sleep
+from functions.randomEvents import *
 
 pelaajan_nimi = Player.current_player.screen_name
-
-def check_points():
-    connect = connection()
-    check_sql = f"SELECT pisteet FROM game WHERE screen_name = '{pelaajan_nimi}'"
-    cursor = connect.cursor()
-    cursor.execute(check_sql)
-    result = cursor.fetchone()
-
-    if result is not None and result[0] >= 150:
-        return True
-
-    cursor.close()
-    connect.close()
-
-    return False
-
-def update_location(Player, new_location):
-    Player.location = new_location
-
-    connect = connection()
-    cursor = connect.cursor()
-
-    cursor.execute("UPDATE game SET location = %s WHERE id = %s", (new_location, Player.id))
-    connect.commit()
-    cursor.close()
-    connect.close()
 
 def random_destination():
     avain = random.choice(list(flightroutes.keys()))
@@ -87,19 +62,57 @@ def game_loop():
 
     ensimmainen_pysakki = arvo_kohteet[1]
     print(f"Laskeudut lentoasemalle: {ensimmainen_pysakki}")
-    update_location(pelaajan_nimi, f"{ensimmainen_pysakki}")
+    Player.setLocation(pelaajan_nimi, ensimmainen_pysakki)
+
+    for kysymys in tehtavat_kolme_max:
+        print(kysymys["kysymys"])
+
+        for vaihtoehto in kysymys["kysymykset"]:
+            print(vaihtoehto)
+
+        vastaus = input("Vastauksesi: ")
+
+        if vastaus == kysymys["oikea_vastaus"]:
+            print(f"Oikein! Sait {kysymys['pisteet']} pistettä!")
+            Player.addScore(pelaajan_nimi,["pisteet"])
+        else:
+            print("bläh bläh bläh")
 
     toinen_pysakki = arvo_kohteet[2]
     print(f"Laskeudut lentoasemalle: {toinen_pysakki}")
-    update_location(pelaajan_nimi, f"{toinen_pysakki}")
+    Player.setLocation(pelaajan_nimi, toinen_pysakki)
+
+    for kysymys in tehtavat_kolme_max:
+        print(kysymys["kysymys"])
+
+        for vaihtoehto in kysymys["kysymykset"]:
+            print(vaihtoehto)
+
+        vastaus = input("Vastauksesi: ")
+
+        if vastaus == kysymys["oikea_vastaus"]:
+            print(f"Oikein! Sait {kysymys['pisteet']} pistettä!")
+            Player.addScore(pelaajan_nimi,["pisteet"])
+        else:
+            print("bläh bläh bläh")
 
     kolmas_pysakki = arvo_kohteet[3]
     print(f"Laskeudut lentoasemalle: {kolmas_pysakki}")
-    update_location(pelaajan_nimi, f"{kolmas_pysakki}")
+    Player.setLocation(pelaajan_nimi, kolmas_pysakki)
 
+    for kysymys in tehtavat_kolme_max:
+        print(kysymys["kysymys"])
 
-    if tarkista_pisteet():
-        print("bläh bläh bläh")
+        for vaihtoehto in kysymys["kysymykset"]:
+            print(vaihtoehto)
+
+        vastaus = input("Vastauksesi: ")
+
+        if vastaus == kysymys["oikea_vastaus"]:
+            print(f"Oikein! Sait {kysymys['pisteet']} pistettä!")
+            Player.addScore(pelaajan_nimi,["pisteet"])
+        else:
+            print("bläh bläh bläh")
 
 ## en tiiä oli vähän tylsää niin korjasin vähän tota looppia ei viel kyl tallenna mitään tietokantaan eikä mihinkään
 ## lisäksi pysäkit nyt antaa sen lentokentän identin eikä lentokentän nimeä

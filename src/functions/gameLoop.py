@@ -6,7 +6,7 @@ from time import sleep
 
 pelaajan_nimi = Player.current_player.screen_name
 
-def tarkista_pisteet():
+def check_points():
     connect = connection()
     check_sql = f"SELECT pisteet FROM game WHERE screen_name = '{pelaajan_nimi}'"
     cursor = connect.cursor()
@@ -20,6 +20,17 @@ def tarkista_pisteet():
     connect.close()
 
     return False
+
+def update_location(Player, new_location):
+    Player.location = new_location
+
+    connect = connection()
+    cursor = connect.cursor()
+
+    cursor.execute("UPDATE game SET location = %s WHERE id = %s", (new_location, Player.id))
+    connect.commit()
+    cursor.close()
+    connect.close()
 
 def random_destination():
     avain = random.choice(list(flightroutes.keys()))
@@ -66,7 +77,6 @@ def game_loop():
 
         if lentotaulu_kysymys == "4":
             print("Oikein! Ehdit portille ja pääset koneeseen.")
-            break
         else:
             print("Väärä portti. Myöhästyit lennolta.")
             break
@@ -77,12 +87,15 @@ def game_loop():
 
     ensimmainen_pysakki = arvo_kohteet[1]
     print(f"Laskeudut lentoasemalle: {ensimmainen_pysakki}")
+    update_location(pelaajan_nimi, f"{ensimmainen_pysakki}")
 
     toinen_pysakki = arvo_kohteet[2]
     print(f"Laskeudut lentoasemalle: {toinen_pysakki}")
+    update_location(pelaajan_nimi, f"{toinen_pysakki}")
 
     kolmas_pysakki = arvo_kohteet[3]
     print(f"Laskeudut lentoasemalle: {kolmas_pysakki}")
+    update_location(pelaajan_nimi, f"{kolmas_pysakki}")
 
 
     if tarkista_pisteet():

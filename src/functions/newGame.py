@@ -1,5 +1,6 @@
 from database.database_connection import database_connect as connection
 from main.player import Player # Tämä tekee muuttujista globaallisia, eli tämän avulla pelaajan nimi voidaan tallentaa ja käyttää myöhemmin pelin aikana. - Daniel
+from functions.gameLoop import game_loop
 
 def new_game():
     connect = connection()
@@ -19,4 +20,6 @@ def new_game():
     cursor.close()
     connect.close()
     Player.current_player = Player.Player(screen_name, cursor.lastrowid)
+
+    game_loop()
     # Tahan funktio joka kutsutaan etta peli voidaan aloittaa. - Daniel

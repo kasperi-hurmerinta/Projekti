@@ -1,6 +1,6 @@
 from database.database_connection import database_connect as connection
 from main.player import Player
-from flightRoutes import *
+from functions.flightRoutes import *
 import random
 from time import sleep
 from functions.randomEvents import *

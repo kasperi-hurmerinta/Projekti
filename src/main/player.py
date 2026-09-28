@@ -1,8 +1,9 @@
 from database.database_connection import database_connect as connection
-current_player = None
 connect = connection()
 
 class Player:
+    current_player = None
+
     def __init__(self, screen_name, id, pisteet=0, location="EFHK"):
         self.screen_name = screen_name
         self.id = id
@@ -17,7 +18,6 @@ class Player:
         cursor.execute(update_sql)
         connect.commit()
         cursor.close()
-        connect.close()
 
     def setLocation(self, location):
         cursor = connect.cursor()
@@ -26,7 +26,6 @@ class Player:
         cursor.execute(update_sql)
         connect.commit()
         cursor.close()
-        connect.close()
         
     def setScore(self):
         cursor = connect.cursor()
@@ -34,7 +33,6 @@ class Player:
         cursor.execute(pull_score_sql)
         result = cursor.fetchone()
         cursor.close()
-        connect.close()
         self.score = result[0] if result else 0
         
     def setRoute(self, route):
@@ -43,7 +41,6 @@ class Player:
         cursor.execute(update_sql)
         connect.commit()
         cursor.close()
-        connect.close()
         self.route = route        
     
     def getScore(self):

@@ -19,7 +19,7 @@ def new_game():
     connect.commit()
     cursor.close()
     connect.close()
-    Player.current_player = Player.Player(screen_name, cursor.lastrowid)
+    Player.current_player = Player(screen_name, cursor.lastrowid)
 
     game_loop()
     # Tahan funktio joka kutsutaan etta peli voidaan aloittaa. - Daniel

@@ -2,10 +2,10 @@ from database.database_connection import database_connect as connection
 current_player = None
 
 class Player:
-    def __init__(self, screen_name, id, score=0, location="EFHK"):
+    def __init__(self, screen_name, id, pisteet=0, location="EFHK"):
         self.screen_name = screen_name
         self.id = id
-        self.score = score
+        self.score = pisteet
         self.location = location
     
     def addScore(self, score):

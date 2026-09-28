@@ -8,6 +8,7 @@ class Player:
         self.id = id
         self.score = pisteet
         self.location = location
+        self.route = None
     
     def addScore(self, score):
         cursor = connect.cursor()

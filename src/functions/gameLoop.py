@@ -24,11 +24,28 @@ def random_destination():
 
 ## en jaksa testata toimiiko mikään vittu - Kasperi
 
+def question_randomizer():
+    kierroksen_kysymykset = random.sample(tehtavat_kolme_max, min(3, len(tehtavat_kolme_max)))
+    
+    for kysymys in kierroksen_kysymykset:
+        print(kysymys["kysymys"])
+        for vaihtoehto in kysymys["kysymykset"]:
+            print(vaihtoehto)
+        
+        vastaus = input("Vastauksesi: ")
+        
+        if vastaus == str(kysymys["oikea_vastaus"] + 1):
+            print(f"Oikein! Sait {kysymys['pisteet']} pistettä!")
+            Player.addScore(pelaajan_nimi, kysymys["pisteet"])
+        else:
+            print("Väärin! Et saanut pisteitä.")
+
 def game_loop():
     arvo_kohteet = random_destination()
+    route = arvo_kohteet[1]
+    Player.setRoute(pelaajan_nimi, route)
 
-    def flight_panel():
-        lentotaulu = f"""
+    lentotaulu = f"""
     ╔══════════════════════════════════════════════════════════════════════╗
     ║                 HELSINKI-VANTAAN LENTOLÄHTÖTAULU                     ║
     ║                         KELLO 07:32                                  ║
@@ -41,20 +58,17 @@ def game_loop():
     ║ FI 847     ║ {arvo_kohteet}       ║ 07:45    ║  4       ║ PORTILLA   ║
     ╚════════════╩══════════════════════╩══════════╩══════════╩════════════╝
     """
-        return lentotaulu
 
-    ensimmainen_lentokentta = "EFHK"
 
-    while True:
-        print(flight_panel())
+    print(lentotaulu)
 
-        lentotaulu_kysymys = input("Anna portin numero: ")
+    lentotaulu_kysymys = input("Anna portin numero: ")
 
-        if lentotaulu_kysymys == "4":
-            print("Oikein! Ehdit portille ja pääset koneeseen.")
-        else:
-            print("Väärä portti. Myöhästyit lennolta.")
-            break
+    if lentotaulu_kysymys == "4":
+        print("Oikein! Ehdit portille ja pääset koneeseen.")
+    else:
+        print("Väärä portti. Myöhästyit lennolta.")
+        return
 
     print("Lentokone käynnistää moottorit...")
     sleep(1.5)
@@ -64,55 +78,19 @@ def game_loop():
     print(f"Laskeudut lentoasemalle: {ensimmainen_pysakki}")
     Player.setLocation(pelaajan_nimi, ensimmainen_pysakki)
 
-    for kysymys in tehtavat_kolme_max:
-        print(kysymys["kysymys"])
-
-        for vaihtoehto in kysymys["kysymykset"]:
-            print(vaihtoehto)
-
-        vastaus = input("Vastauksesi: ")
-
-        if vastaus == kysymys["oikea_vastaus"]:
-            print(f"Oikein! Sait {kysymys['pisteet']} pistettä!")
-            Player.addScore(pelaajan_nimi,["pisteet"])
-        else:
-            print("bläh bläh bläh")
+    question_randomizer()
 
     toinen_pysakki = arvo_kohteet[2]
     print(f"Laskeudut lentoasemalle: {toinen_pysakki}")
     Player.setLocation(pelaajan_nimi, toinen_pysakki)
 
-    for kysymys in tehtavat_kolme_max:
-        print(kysymys["kysymys"])
-
-        for vaihtoehto in kysymys["kysymykset"]:
-            print(vaihtoehto)
-
-        vastaus = input("Vastauksesi: ")
-
-        if vastaus == kysymys["oikea_vastaus"]:
-            print(f"Oikein! Sait {kysymys['pisteet']} pistettä!")
-            Player.addScore(pelaajan_nimi,["pisteet"])
-        else:
-            print("bläh bläh bläh")
+    question_randomizer()
 
     kolmas_pysakki = arvo_kohteet[3]
     print(f"Laskeudut lentoasemalle: {kolmas_pysakki}")
     Player.setLocation(pelaajan_nimi, kolmas_pysakki)
 
-    for kysymys in tehtavat_kolme_max:
-        print(kysymys["kysymys"])
-
-        for vaihtoehto in kysymys["kysymykset"]:
-            print(vaihtoehto)
-
-        vastaus = input("Vastauksesi: ")
-
-        if vastaus == kysymys["oikea_vastaus"]:
-            print(f"Oikein! Sait {kysymys['pisteet']} pistettä!")
-            Player.addScore(pelaajan_nimi,["pisteet"])
-        else:
-            print("bläh bläh bläh")
+    question_randomizer()
 
 ## en tiiä oli vähän tylsää niin korjasin vähän tota looppia ei viel kyl tallenna mitään tietokantaan eikä mihinkään
 ## lisäksi pysäkit nyt antaa sen lentokentän identin eikä lentokentän nimeä

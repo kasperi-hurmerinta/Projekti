@@ -12,6 +12,7 @@ Saavu määränpäähän.
 Huom:
 Väärä lento alussa = häviö.
 Alle 150 pistettä = häviö.
+
 """)
     player_ready = input("Oletko lukenut ohjeet?: Y/N ")
     if player_ready.lower() == "y":

@@ -4,8 +4,7 @@ from functions.flightRoutes import *
 import random
 from time import sleep
 from functions.randomEvents import *
-from functions.mainScreen import main_screen
-from functions.savegame import savegame
+from functions.savegame import *
 
 def random_destination():
     avain = random.choice(list(flightroutes.keys()))
@@ -34,31 +33,33 @@ def question_randomizer():
         for vaihtoehto in kysymys["kysymykset"]:
             print(vaihtoehto)
 
-            print("0. Palaa päävalikkoon")
+        print("0. Palaa päävalikkoon")
 
-            vastaus = input("Vastauksesi: ")
+        vastaus = input("Vastauksesi: ")
 
     if vastaus == "0":
 
         tallennus = input("Haluatko tallentaa pelin? (y/n): ").lower()
 
-    if tallennus == "y":
-        savegame(
-        Player.current_player.screen_name,
-        Player.current_player.pisteet,
-        Player.current_player.location
-        )
+        if tallennus == "y":
+            savegame(
+            Player.current_player.screen_name,
+            Player.current_player.pisteet,
+            Player.current_player.location
+            )
 
-        print("Peli tallennettu.")
+            print("Peli tallennettu.")
 
-        main_screen()
-        return
+            main_screen()
+            return
 
-    if vastaus == str(kysymys["oikea_vastaus"] + 1):
+    elif vastaus == str(kysymys["oikea_vastaus"] + 1):
         print(f"Oikein! Sait {kysymys['pisteet']} pistettä!")
         Player.current_player.addScore(kysymys["pisteet"])
+
     else:
         print("Väärin! Et saanut pisteitä.")
+
 
 def game_loop():
     pelaajan_nimi = Player.current_player.screen_name

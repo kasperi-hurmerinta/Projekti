@@ -80,8 +80,7 @@ def question_randomizer():
         vastaus = input("Vastauksesi: ")
 
         if vastaus == "0":
-            if input("Haluatko tallentaa pelin? (y/n): ").lower() == "y":
-                print("Peli tallennettu.")
+            print("Peli tallennettu.")
             return False
 
         elif vastaus == str(kysymys["oikea_vastaus"] + 1):

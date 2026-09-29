@@ -8,9 +8,13 @@ def new_game():
 
     while True:
         screen_name = input("Anna pelaajanimesi: ")
+        
+        if not screen_name:
+            print("Virhe: pelaajanimi ei voi olla tyhjä.")
+            continue
 
-        check_sql = f"SELECT screen_name FROM game WHERE screen_name = '{screen_name}'"
-        cursor.execute(check_sql)
+        check_sql = "SELECT screen_name FROM game WHERE screen_name = %s"
+        cursor.execute(check_sql, (screen_name,))
         result = cursor.fetchone()
 
         if result:
@@ -19,8 +23,8 @@ def new_game():
         else:
             break
 
-    insert_sql = f"INSERT INTO game (screen_name) VALUES ('{screen_name}')"
-    cursor.execute(insert_sql)
+    insert_sql = "INSERT INTO game (screen_name) VALUES (%s)"
+    cursor.execute(insert_sql, (screen_name,))
     connect.commit()
 
     player_id = cursor.lastrowid
@@ -31,4 +35,3 @@ def new_game():
     Player.current_player = Player(screen_name, player_id)
 
     game_loop()
-    # Tahan funktio joka kutsutaan etta peli voidaan aloittaa. - Daniel

@@ -48,4 +48,28 @@ EVENTS = {
         "pisteet": 0,
         "tapahtuma_id": 6,
     },
+
+"portti_vaihtuu": {
+    "kysymys": "Lentosi lähtöportti on vaihtunut. Mitä teet?",
+    "kysymykset": ["(1.) Tarkistat uuden portin ja lähdet sinne", "(2.) Jäät odottamaan vanhalle portille", "(3.) Menet lähimmälle portille", "(4.) Päätät lähteä kotiin"],
+    "oikea_vastaus": 0,
+    "pisteet": 0,
+    "tapahtuma_id": 7,
+    },
+
+"lompakko_lattialla": {
+    "kysymys": "Löydät lompakon lentokentän lattialta. Mitä teet?",
+    "kysymykset": ["(1.) Viet sen löytötavarapisteelle", "(2.) Laitat sen omaan taskuusi", "(3.) Jätät sen lattialle", "(4.) Annat sen ensimmäiselle vastaantulijalle"],
+    "oikea_vastaus": 0,
+    "pisteet": 0,
+    "tapahtuma_id": 8,
+    },
+
+"viimeinen_kutsu": {
+    "kysymys": "Lentosi viimeinen kuulutus alkaa. Mitä teet?",
+    "kysymykset": ["(1.) Menet heti oikealle lähtöportille", "(2.) Jäät vielä ostamaan eväitä", "(3.) Menet odottamaan väärälle portille", "(4.) Jäät selvittämään, mistä kuulutus tuli"],
+    "oikea_vastaus": 0,
+    "pisteet": 0,
+    "tapahtuma_id": 9,
+    },
 }

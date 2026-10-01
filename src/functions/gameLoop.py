@@ -51,7 +51,7 @@ def departure_gate(kohde):
     ║ AY 104     ║ Tukholma             ║ 07:38    ║ 12       ║ LÄHTENYT   ║
     ║ FR 219     ║ Lontoo               ║ 08:05    ║ 18       ║ ODOTTAA    ║
     ║ AY 532     ║ Oulu                 ║ 08:21    ║  6       ║ ODOTTAA    ║
-    ║ FI 847     ║ {kohde:<20} ║ 07:45    ║  4       ║ PORTILLA   ║
+    ║ FI 847     ║ {kohde:<20}          ║ 07:45    ║  4       ║ PORTILLA   ║
     ╚════════════╩══════════════════════╩══════════╩══════════╩════════════╝
     """
     
@@ -94,4 +94,40 @@ def question_randomizer():
 
 def end_game(player):
     print("Onneksi olkoon, reitti suoritettu!")
+
+    putka_art = """
+    
+    _________________________
+     |  |  |  |  |  |  |  | |
+     |  |  |  |  |  |  |  | |
+     |  |  |  |  |  |  |  | |
+     |  |  |  |  |  |  |  | |
+     |  |  |  |  |  |  |  | |
+     |__|__|__|__|__|__|__|_|
+     |                      |
+     |   .-------------.    |
+     |   |    PUTKA    |    |
+     |   |             |    |
+     |   |_____________|    |
+     |______________________|
+    
+    """
+
+    if player.GetScore() >= 150:
+        print("Selvisit kaikista kolmesta lentokentästä. Olet aivan poikki.")
+        sleep(1.5)
+        print("Et jaksa enää lähteä lennolle. Menet lentokentän hotelliin.")
+        sleep(1.5)
+        print("Pääset huoneeseen ja kaadut sänkyyn.")
+        sleep(1.5)
+        print("Aamulla heräät. Pää ei enää jomota. Vihdoin saat nukkua rauhassa.")
+    else:
+        print("Et saanut tarpeeksi pisteitä.")
+        sleep(1.5)
+        print("Järjestyksenvalvojat odottavat sinua määränpäässä. He ottavat sinut kiinni.")
+        sleep(1.5)
+        print("He vievät sinut putkaan. Hävisit pelin! #GG")
+        print(putka_art)
+
+
     print(f"Lopulliset pisteesi: {player.getScore()}")

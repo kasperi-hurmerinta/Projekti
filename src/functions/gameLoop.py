@@ -51,7 +51,7 @@ def departure_gate(kohde):
     ║ AY 104     ║ Tukholma             ║ 07:38    ║ 12       ║ LÄHTENYT   ║
     ║ FR 219     ║ Lontoo               ║ 08:05    ║ 18       ║ ODOTTAA    ║
     ║ AY 532     ║ Oulu                 ║ 08:21    ║  6       ║ ODOTTAA    ║
-    ║ FI 847     ║ {kohde:<20}          ║ 07:45    ║  4       ║ PORTILLA   ║
+    ║ FI 847     ║ {kohde}              ║ 07:45    ║  4       ║ PORTILLA   ║
     ╚════════════╩══════════════════════╩══════════╩══════════╩════════════╝
     """
     
@@ -113,7 +113,7 @@ def end_game(player):
     
     """
 
-    if player.GetScore() >= 150:
+    if player.getScore() >= 150:
         print("Selvisit kaikista kolmesta lentokentästä. Olet aivan poikki.")
         sleep(1.5)
         print("Et jaksa enää lähteä lennolle. Menet lentokentän hotelliin.")

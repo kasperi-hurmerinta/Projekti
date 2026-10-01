@@ -51,7 +51,7 @@ def departure_gate(kohde):
     ║ AY 104     ║ Tukholma             ║ 07:38    ║ 12       ║ LÄHTENYT   ║
     ║ FR 219     ║ Lontoo               ║ 08:05    ║ 18       ║ ODOTTAA    ║
     ║ AY 532     ║ Oulu                 ║ 08:21    ║  6       ║ ODOTTAA    ║
-    ║ FI 847     ║ {kohde}              ║ 07:45    ║  4       ║ PORTILLA   ║
+    ║ FI 847     ║ {kohde:<20} ║ 07:45    ║  4       ║ PORTILLA   ║
     ╚════════════╩══════════════════════╩══════════╩══════════╩════════════╝
     """
     
@@ -86,6 +86,7 @@ def question_randomizer():
         elif vastaus == str(kysymys["oikea_vastaus"] + 1):
             print(f"Oikein! Sait {kysymys['pisteet']} pistettä!")
             Player.current_player.addScore(kysymys["pisteet"])
+            sleep(3)
         else:
             print("Väärin! Et saanut pisteitä.")
 
@@ -120,7 +121,8 @@ def end_game(player):
         sleep(1.5)
         print("Pääset huoneeseen ja kaadut sänkyyn.")
         sleep(1.5)
-        print("Aamulla heräät. Pää ei enää jomota. Vihdoin saat nukkua rauhassa.")
+        print("Aamulla heräät. Pää ei enää jomota. Vihdoin saat nukkua rauhassa. Olet voittanut pelin!")
+        sleep(3)
     else:
         print("Et saanut tarpeeksi pisteitä.")
         sleep(1.5)
@@ -128,6 +130,6 @@ def end_game(player):
         sleep(1.5)
         print("He vievät sinut putkaan. Hävisit pelin! #GG")
         print(putka_art)
-
+        sleep(3)
 
     print(f"Lopulliset pisteesi: {player.getScore()}")

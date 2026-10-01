@@ -71268,48 +71268,11 @@ CREATE TABLE IF NOT EXISTS `game` (
   `location` varchar(10) DEFAULT NULL,
   `screen_name` varchar(40) DEFAULT NULL,
   `pisteet` INT NOT NULL DEFAULT 0,
+  `route` INT NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   KEY `location` (`location`),
   CONSTRAINT `game_ibfk_1` FOREIGN KEY (`location`) REFERENCES `airport` (`ident`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
-
--- Dumping data for table flight_game.game: ~3 rows (suunnilleen)
-
--- Dumping structure for taulu flight_game.goal
-CREATE TABLE IF NOT EXISTS `goal` (
-  `id` int(11) NOT NULL,
-  `name` varchar(40) DEFAULT NULL,
-  `description` varchar(200) DEFAULT NULL,
-  `icon` varchar(8) DEFAULT NULL,
-  `target` varchar(40) DEFAULT NULL,
-  `target_minvalue` decimal(8,2) DEFAULT NULL,
-  `target_maxvalue` decimal(8,2) DEFAULT NULL,
-  `target_text` varchar(40) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
-
--- Dumping data for table flight_game.goal: ~8 rows (suunnilleen)
-INSERT INTO `goal` (`id`, `name`, `description`, `icon`, `target`, `target_minvalue`, `target_maxvalue`, `target_text`) VALUES
-	(1, 'HOT', 'Temperature over +25C', '01d', 'TEMP', 25.00, 9999.00, NULL),
-	(2, 'COLD', 'Temperature under -20C', '13d', 'TEMP', -9999.00, -20.00, NULL),
-	(3, '0DEG', 'Temperature exactly 0C', '04d', 'TEMP', -0.50, 0.50, NULL),
-	(4, '10DEG', 'Temperature exactly +10C', '04d', 'TEMP', 9.50, 10.50, NULL),
-	(5, '20DEG', 'Temperature exactly +20C', '04d', 'TEMP', 19.50, 20.50, NULL),
-	(6, 'CLEAR', 'Clear skies', '01d', 'WEATHER', NULL, NULL, 'Clear'),
-	(7, 'CLOUDS', 'Cloudy', '04d', 'WEATHER', NULL, NULL, 'Clouds'),
-	(8, 'WINDY', 'Wind blows more than 10 m/s', '04d', 'WIND', 10.00, 9999.00, NULL);
-
--- Dumping structure for taulu flight_game.goal_reached
-CREATE TABLE IF NOT EXISTS `goal_reached` (
-  `game_id` INT NOT NULL,
-  `goal_id` int(11) NOT NULL,
-  PRIMARY KEY (`game_id`,`goal_id`),
-  KEY `goalid` (`goal_id`),
-  CONSTRAINT `goal_reached_ibfk_1` FOREIGN KEY (`game_id`) REFERENCES `game` (`id`),
-  CONSTRAINT `goal_reached_ibfk_2` FOREIGN KEY (`goal_id`) REFERENCES `goal` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
-
--- Dumping data for table flight_game.goal_reached: ~4 rows (suunnilleen)
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

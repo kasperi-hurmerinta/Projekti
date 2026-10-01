@@ -13,26 +13,27 @@ def main_screen():
                       `---~~)___________(------------`````
                       =  ===(_________D
     '''
-    # Tässä oli ennen while True, ja ennen match case tehtiin jokaisen if lauseen jälkeen break, eli kutsuttiin funktio ja suljettiin tää while breakillä... Miksi? - Daniel
-    print(plane_art)
-    print("1.Uusi peli")
-    print("2.Jatka peliä")
-    print("3.Ohjeet")
-    print("4.Lopeta")
 
-    selection = input("Valitse toiminto: ")
+    while True:
+        print(plane_art)
+        print("1.Uusi peli")
+        print("2.Jatka peliä")
+        print("3.Ohjeet")
+        print("4.Lopeta")
 
-    # Käytetään match-case -rakennetta valinnan käsittelyyn sillä if lauseet vievät liikaa tilaa ja tekevät koodista vaikealukuista. Match-case on myös helpompi laajentaa tulevaisuudessa. Ite oot AI - Daniel
-    match selection:
-        case "1":
-            print("Aloitetaan uusi peli!")
-            intro_game()
-        case "2":
-            print("Valitse peli!")
-            load_game()
-        case "3":
-            instructions_game()
-        case "4":
-            print("Kiitos pelaamisesta. Näkemiin!")
-        case _:
-            print("Virheellinen valinta! Valitse luku 1-4 väliltä.")
+        selection = input("Valitse toiminto: ")
+
+        match selection:
+            case "1":
+                print("Aloitetaan uusi peli!")
+                intro_game()
+            case "2":
+                print("Valitse peli!")
+                load_game()
+            case "3":
+                instructions_game()
+            case "4":
+                print("Kiitos pelaamisesta. Näkemiin!")
+                return
+            case _:
+                print("Virheellinen valinta! Valitse luku 1-4 väliltä.")

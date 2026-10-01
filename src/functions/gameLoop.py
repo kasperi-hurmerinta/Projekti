@@ -1,49 +1,47 @@
-from database.database_connection import database_connect as connection
 from main.player import Player
-from flightRoutes import *
+from functions.flightRoutes import flightroutes
+from functions.randomEvents import EVENTS
 import random
-
-def tarkista_pisteet():
-    connect = connection()
-    check_sql = f"SELECT pisteet FROM game WHERE screen_name = '{Player.current_player.screen_name}'"
-    cursor = connect.cursor()
-    cursor.execute(check_sql)
-    result = cursor.fetchone()
-
-    if result is not None and result[0] >= 150:
-        return True
-
-    cursor.close()
-    connect.close()
-
-    return False
-
-def random_destination():
-    avain = random.choice(list(flightroutes.keys()))
-    valittu_reitti = flightroutes[avain]
-
-    ensimmainen_lentokentta = flightroutes[avain][1]
-    toinen_lentokentta = flightroutes[avain][2]
-    kolmas_lentokentta = flightroutes[avain][3]
-
-    maaranpaa = flightroutes[avain][4]
-
-    print(avain, valittu_reitti)
-    print(ensimmainen_lentokentta, toinen_lentokentta, kolmas_lentokentta)
-
-    return avain, valittu_reitti, ensimmainen_lentokentta, toinen_lentokentta, kolmas_lentokentta, maaranpaa
-
-## en jaksa testata toimiiko mikään vittu - Kasperi
+from time import sleep
 
 def game_loop():
-    arvo_kohteet = random_destination()
+    route = random.choice(list(flightroutes.keys()))
+    Player.current_player.setRoute(route)
+    game()
 
-    ensimmainen_pysakki = arvo_kohteet[1]
-    toinen_pysakki = arvo_kohteet[2]
-    kolmas_pysakki = arvo_kohteet[3]
+def game():
+    player = Player.current_player
+    route_list = flightroutes.get(player.getRoute())
 
-    def flight_panel():
-        lentotaulu = f"""
+    if route_list is None:
+        print("Tallennetulla pelillä ei ole reittiä. Aloita uusi peli.")
+        return
+
+    if player.getLocation() not in route_list[1:]:
+        if not departure_gate(route_list[1]):
+            return
+        print(f"Laskeudut lentoasemalle: {route_list[1]}")
+        player.setLocation(route_list[1])
+
+    while True:
+        location = player.getLocation()
+        index = route_list.index(location)
+        print(f"Olet kohteessa {location} ({index}/{len(route_list) - 1}).")
+
+        if not question_randomizer():
+            return
+
+        if index == len(route_list) - 1:
+            end_game(player)
+            return
+
+        next_location = route_list[index + 1]
+        print(f"Lennetään seuraavaksi kohteeseen {next_location}...")
+        player.setLocation(next_location)
+
+
+def departure_gate(kohde):
+    lentotaulu = f"""
     ╔══════════════════════════════════════════════════════════════════════╗
     ║                 HELSINKI-VANTAAN LENTOLÄHTÖTAULU                     ║
     ║                         KELLO 07:32                                  ║
@@ -53,22 +51,47 @@ def game_loop():
     ║ AY 104     ║ Tukholma             ║ 07:38    ║ 12       ║ LÄHTENYT   ║
     ║ FR 219     ║ Lontoo               ║ 08:05    ║ 18       ║ ODOTTAA    ║
     ║ AY 532     ║ Oulu                 ║ 08:21    ║  6       ║ ODOTTAA    ║
-    ║ FI 847     ║ {ensimmainen_pysakki}║ 07:45    ║  4       ║ PORTILLA   ║
+    ║ FI 847     ║ {kohde:<20} ║ 07:45    ║  4       ║ PORTILLA   ║
     ╚════════════╩══════════════════════╩══════════╩══════════╩════════════╝
     """
-        return lentotaulu
+    
+    print(lentotaulu)
 
-    ensimmainen_lentokentta = "Helsinki-Vantaa Lentokenttä"
-    pelaajan_nimi = Player.current_player.screen_name
+    if input("Anna portin numero: ") != "4":
+        print("Väärä portti. Myöhästyit lennolta.")
+        return False
 
-    while True:
-        flight_panel()
+    print("Oikein! Ehdit portille ja pääset koneeseen.")
+    print("Lentokone käynnistää moottorit...")
+    sleep(1.5)
+    print("Lentokone rullaa kiitotielle ja nousee ilmaan!")
+    return True
 
-        lentotaulu_kysymys = input("Anna portin numero: ")
 
-        if lentotaulu_kysymys != 4:
-            print("bläh bläh bläh")
-            break
+def question_randomizer():
+    kierroksen_kysymykset = random.sample(list(EVENTS.values()), 3)
 
-    if tarkista_pisteet():
-        print("bläh bläh bläh")
+    for kysymys in kierroksen_kysymykset:
+        print(kysymys["kysymys"])
+        for vaihtoehto in kysymys["kysymykset"]:
+            print(vaihtoehto)
+        print("\n0. Palaa päävalikkoon")
+
+        vastaus = input("Vastauksesi: ")
+
+        if vastaus == "0":
+            print("Peli tallennettu.")
+            return False
+
+        elif vastaus == str(kysymys["oikea_vastaus"] + 1):
+            print(f"Oikein! Sait {kysymys['pisteet']} pistettä!")
+            Player.current_player.addScore(kysymys["pisteet"])
+        else:
+            print("Väärin! Et saanut pisteitä.")
+
+    return True
+
+
+def end_game(player):
+    print("Onneksi olkoon, reitti suoritettu!")
+    print(f"Lopulliset pisteesi: {player.getScore()}")

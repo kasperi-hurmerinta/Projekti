@@ -3,6 +3,7 @@ from functions.flightRoutes import flightroutes
 from functions.randomEvents import EVENTS
 import random
 from time import sleep
+from database.database_connection import database_connect as connection
 
 def game_loop():
     route = random.choice(list(flightroutes.keys()))
@@ -92,6 +93,18 @@ def question_randomizer():
 
     return True
 
+def peli_valmis_poista_tiedot():
+    player = Player.current_player.screen_name
+
+    connect = connection()
+    cursor = connect.cursor()
+
+    cursor.execute("DELETE FROM game where screen_name = %s",
+    (player,))
+    connect.commit()
+
+    cursor.close()
+    connect.close()
 
 def end_game(player):
     print("Onneksi olkoon, reitti suoritettu!")
@@ -123,6 +136,7 @@ def end_game(player):
         sleep(1.5)
         print("Aamulla heräät. Pää ei enää jomota. Vihdoin saat nukkua rauhassa. Olet voittanut pelin!")
         sleep(3)
+        peli_valmis_poista_tiedot()
     else:
         print("Et saanut tarpeeksi pisteitä.")
         sleep(1.5)
@@ -131,5 +145,6 @@ def end_game(player):
         print("He vievät sinut putkaan. Hävisit pelin! #GG")
         print(putka_art)
         sleep(3)
+        peli_valmis_poista_tiedot()
 
     print(f"Lopulliset pisteesi: {player.getScore()}")

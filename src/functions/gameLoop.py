@@ -10,6 +10,32 @@ def game_loop():
     Player.current_player.setRoute(route)
     game()
 
+def icaokoodi_lentokentaksi(icao):
+
+    connect = connection()
+    cursor = connect.cursor()
+
+    check_sql = "SELECT name FROM airport WHERE ident = %s"
+    cursor.execute(check_sql, (icao,))
+    result = cursor.fetchone()
+
+    cursor.close()
+    connect.close()
+
+    return result[0]
+
+def icaokoodi_maaksi(icao):
+    connect = connection()
+    cursor = connect.cursor()
+
+    check_sql = "SELECT country.name FROM airport JOIN country ON airport.iso_country = country.iso_country WHERE airport.ident = %s"
+    cursor.execute(check_sql, (icao,))
+    result = cursor.fetchone()
+
+    cursor.close()
+    connect.close()
+
+    return result[0]
 
 def game():
     player = Player.current_player
@@ -18,21 +44,6 @@ def game():
     if route_list is None:
         print("Tallennetulla pelillä ei ole reittiä. Aloita uusi peli.")
         return
-
-    def icaokoodi_lentokentaksi(icao):
-
-        connect = connection()
-        cursor = connect.cursor()
-
-        check_sql = "SELECT name FROM airport WHERE ident = %s"
-        cursor.execute(check_sql, (icao,))
-        result = cursor.fetchone()
-
-        cursor.close()
-        connect.close()
-
-        return result[0]
-
 
     if player.getLocation() not in route_list[1:]:
         if not departure_gate(route_list[1]):
@@ -71,16 +82,16 @@ def departure_gate(kohde):
     ╠════════════╦══════════════════════╦══════════╦══════════╦════════════╣
     ║ LENTO      ║ KOHDE                ║ LÄHTÖ    ║ PORTTI   ║ TILA       ║
     ╠════════════╬══════════════════════╬══════════╬══════════╬════════════╣
-    ║ AY 104     ║ Tukholma             ║ 07:38    ║ 12       ║ LÄHTENYT   ║
-    ║ FR 219     ║ Lontoo               ║ 08:05    ║ 18       ║ ODOTTAA    ║
-    ║ AY 532     ║ Oulu                 ║ 08:21    ║  6       ║ ODOTTAA    ║
-    ║ FI 847     ║ {kohde:<20} ║ 07:45    ║ {satunnainen_numero}        ║ PORTILLA   ║
+    ║ AY 104     ║ Stockholm            ║ 07:38    ║ 12       ║ LÄHTENYT   ║
+    ║ FR 219     ║ London               ║ 08:05    ║ 18       ║ ODOTTAA    ║
+    ║ AY 532     ║ Oulu                 ║ 08:21    ║ 6        ║ ODOTTAA    ║
+    ║ FI 847     ║ {icaokoodi_maaksi(kohde):<20} ║ 07:45  ║ {satunnainen_numero:9}   ║ PORTILLA   ║
     ╚════════════╩══════════════════════╩══════════╩══════════╩════════════╝
     """
     
     print(lentotaulu)
 
-    if input("Anna portin numero: ") != satunnainen_numero:
+    if input("Anna portin numero: ") != str(satunnainen_numero):
         print("Väärä portti. Myöhästyit lennolta.")
         return False
 

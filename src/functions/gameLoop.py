@@ -62,6 +62,8 @@ def game():
 
 
 def departure_gate(kohde):
+    satunnainen_numero = random.randint(1,10)
+
     lentotaulu = f"""
     ╔══════════════════════════════════════════════════════════════════════╗
     ║                 HELSINKI-VANTAAN LENTOLÄHTÖTAULU                     ║
@@ -72,13 +74,13 @@ def departure_gate(kohde):
     ║ AY 104     ║ Tukholma             ║ 07:38    ║ 12       ║ LÄHTENYT   ║
     ║ FR 219     ║ Lontoo               ║ 08:05    ║ 18       ║ ODOTTAA    ║
     ║ AY 532     ║ Oulu                 ║ 08:21    ║  6       ║ ODOTTAA    ║
-    ║ FI 847     ║ {kohde:<20} ║ 07:45    ║  4       ║ PORTILLA   ║
+    ║ FI 847     ║ {kohde:<20} ║ 07:45    ║ {satunnainen_numero}        ║ PORTILLA   ║
     ╚════════════╩══════════════════════╩══════════╩══════════╩════════════╝
     """
     
     print(lentotaulu)
 
-    if input("Anna portin numero: ") != "4":
+    if input("Anna portin numero: ") != satunnainen_numero:
         print("Väärä portti. Myöhästyit lennolta.")
         return False
 

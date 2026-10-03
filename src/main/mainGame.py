@@ -1,0 +1,13 @@
+import sys
+import os
+
+from functions.gameLoop import *
+
+src_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+
+if src_path not in sys.path:
+    sys.path.insert(0, src_path)
+
+from functions.mainScreen import main_screen
+        
+main_screen()

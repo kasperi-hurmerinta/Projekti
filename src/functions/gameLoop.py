@@ -88,7 +88,8 @@ def departure_gate(kohde):
     ║ FI 847     ║ {icaokoodi_maaksi(kohde):<20} ║ 07:45  ║ {satunnainen_numero:9}   ║ PORTILLA   ║
     ╚════════════╩══════════════════════╩══════════╩══════════╩════════════╝
     """
-    
+
+    sleep(1.5)
     print(lentotaulu)
 
     if input("Anna portin numero: ") != str(satunnainen_numero):

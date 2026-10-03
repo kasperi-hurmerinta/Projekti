@@ -24,13 +24,13 @@ def intro_game():
 
     print(airport_art)
     print("Uhhh... Päätä jomottaa kuin joku löisi sitä vasaralla.")
-    sleep(3)
+    sleep(1.5)
     print("Avaat silmäsi. Makaat kovalla penkillä keskellä lentokenttää!")
-    sleep(3)
+    sleep(1.5)
     print("Missä minä olen? Kädessäsi on viinapullo.")
-    sleep(3)
+    sleep(1.5)
     print("Minulla on kiire, pitää äkkiä päästä lennolle! Portti sulkeutuu 12 minuutin päästä.")
-    sleep(3)
+    sleep(1.5)
     print("Nyt pitää mennä!")
 
     # Kun mä testailin tätä projektii pikkasen, niin toi sleep(3) on vähä liian pitkä. Kanttii varmaan pistää sleep(1.5), ainakin kokeiluun, kattokaa ite, ei mul o välii - Daniel

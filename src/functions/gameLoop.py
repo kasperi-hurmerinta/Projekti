@@ -10,6 +10,19 @@ def game_loop():
     Player.current_player.setRoute(route)
     game()
 
+def peli_valmis_poista_tiedot():
+    player = Player.current_player.screen_name
+
+    connect = connection()
+    cursor = connect.cursor()
+
+    check_sql = "DELETE FROM game where screen_name = %s",
+    cursor.execute(check_sql, (player,))
+    connect.commit()
+
+    cursor.close()
+    connect.close()
+
 def icaokoodi_lentokentaksi(icao):
 
     connect = connection()
@@ -85,8 +98,13 @@ def departure_gate(kohde):
     ║ AY 104     ║ Stockholm            ║ 07:38    ║ 12       ║ LÄHTENYT   ║
     ║ FR 219     ║ London               ║ 08:05    ║ 18       ║ ODOTTAA    ║
     ║ AY 532     ║ Oulu                 ║ 08:21    ║ 6        ║ ODOTTAA    ║
-    ║ FI 847     ║ {icaokoodi_maaksi(kohde):<20} ║ 07:45  ║ {satunnainen_numero:9}   ║ PORTILLA   ║
+    ║ {'FI 847':<11}║ {icaokoodi_maaksi(kohde):<21}║ {'07:45':<9}║ {satunnainen_numero:<9}║ {'PORTILLA':<11}║
     ╚════════════╩══════════════════════╩══════════╩══════════╩════════════╝
+    """
+
+    lentokone = f"""
+                 __|__
+          --o--o--(_)--o--o--
     """
 
     sleep(1.5)
@@ -94,12 +112,15 @@ def departure_gate(kohde):
 
     if input("Anna portin numero: ") != str(satunnainen_numero):
         print("Väärä portti. Myöhästyit lennolta.")
+        peli_valmis_poista_tiedot()
         return False
 
     print("Oikein! Ehdit portille ja pääset koneeseen.")
     print("Lentokone käynnistää moottorit...")
     sleep(1.5)
     print("Lentokone rullaa kiitotielle ja nousee ilmaan!")
+    print(lentokone)
+    sleep(1.5)
     return True
 
 
@@ -126,19 +147,6 @@ def question_randomizer():
             print("Väärin! Et saanut pisteitä.")
 
     return True
-
-def peli_valmis_poista_tiedot():
-    player = Player.current_player.screen_name
-
-    connect = connection()
-    cursor = connect.cursor()
-
-    check_sql = "DELETE FROM game where screen_name = %s",
-    cursor.execute(check_sql, (player,))
-    connect.commit()
-
-    cursor.close()
-    connect.close()
 
 def end_game(player):
     print("Onneksi olkoon, reitti suoritettu!")
@@ -183,3 +191,5 @@ def end_game(player):
 
     print(f"Lopulliset pisteesi: {player.getScore()}. Päävalikko avautuu (5) sekunnin päästä.")
     sleep(5)
+
+

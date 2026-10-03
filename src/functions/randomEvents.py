@@ -74,4 +74,4 @@ EVENTS = {
     },
 }
 
-## nyt saa yhteensä max jotain 200 pistettä
+## nyt saa yhteensä max jotain 200 pistettä.

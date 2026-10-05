@@ -10,19 +10,6 @@ def game_loop():
     Player.current_player.setRoute(route)
     game()
 
-def peli_valmis_poista_tiedot():
-    player = Player.current_player.screen_name
-
-    connect = connection()
-    cursor = connect.cursor()
-
-    check_sql = "DELETE FROM game where screen_name = %s",
-    cursor.execute(check_sql, (player,))
-    connect.commit()
-
-    cursor.close()
-    connect.close()
-
 def icaokoodi_lentokentaksi(icao):
 
     connect = connection()
@@ -83,6 +70,7 @@ def game():
         seuraava_lentokentan_nimi = icaokoodi_lentokentaksi(next_location)
         print(f"Lennetään seuraavaksi kohteeseen {seuraava_lentokentan_nimi}...")
         player.setLocation(next_location)
+        sleep(3)
 
 
 def departure_gate(kohde):
@@ -121,6 +109,9 @@ def departure_gate(kohde):
     print("Lentokone rullaa kiitotielle ja nousee ilmaan!")
     print(lentokone)
     sleep(1.5)
+    print("Seuraavaksi pääset suorittamaan tehtäviä eri lentokentillä.")
+    print("Jokaisesta tehtävästä saat 22 pistettä. Kerää vähintään 150 pistettä, niin voitat pelin ennen viimeistä lentokenttää! \n")
+    sleep(5)
     return True
 
 
@@ -140,13 +131,27 @@ def question_randomizer():
             return False
 
         elif vastaus == str(kysymys["oikea_vastaus"] + 1):
-            print(f"Oikein! Sait {kysymys['pisteet']} pistettä!")
+            print(f"Oikein! Sait {kysymys['pisteet']} pistettä! \n")
             Player.current_player.addScore(kysymys["pisteet"])
             sleep(3)
         else:
-            print("Väärin! Et saanut pisteitä.")
+            print("Väärin! Et saanut pisteitä. \n")
+            sleep(3)
 
     return True
+
+def peli_valmis_poista_tiedot():
+    player = Player.current_player.screen_name
+
+    connect = connection()
+    cursor = connect.cursor()
+
+    check_sql = "DELETE FROM game WHERE screen_name = %s"
+    cursor.execute(check_sql, (player,))
+    connect.commit()
+
+    cursor.close()
+    connect.close()
 
 def end_game(player):
     print("Onneksi olkoon, reitti suoritettu!")

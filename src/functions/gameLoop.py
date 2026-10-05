@@ -51,7 +51,8 @@ def game():
 
         player.setLocation(route_list[1])
         lentokentan_nimi = icaokoodi_lentokentaksi(player.getLocation())
-        print(f"Laskeudut lentoasemalle: {lentokentan_nimi}")
+        print(f"Laskeudut lentoasemalle: {lentokentan_nimi}\n")
+        sleep(3)
 
     while True:
         location = player.getLocation()
@@ -68,7 +69,7 @@ def game():
 
         next_location = route_list[index + 1]
         seuraava_lentokentan_nimi = icaokoodi_lentokentaksi(next_location)
-        print(f"Lennetään seuraavaksi kohteeseen {seuraava_lentokentan_nimi}...")
+        print(f"Lennetään seuraavaksi kohteeseen {seuraava_lentokentan_nimi}...\n")
         player.setLocation(next_location)
         sleep(3)
 

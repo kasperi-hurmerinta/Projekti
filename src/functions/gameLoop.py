@@ -111,7 +111,7 @@ def departure_gate(kohde):
     print(lentokone)
     sleep(1.5)
     print("Seuraavaksi pääset suorittamaan tehtäviä eri lentokentillä.")
-    print("Jokaisesta tehtävästä saat 15 pistettä. Kerää vähintään 150 pistettä, niin voitat pelin ennen viimeistä lentokenttää! \n")
+    print("Jokaisesta tehtävästä saat 22 pistettä. Kerää vähintään 150 pistettä, niin voitat pelin ennen viimeistä lentokenttää! \n")
     sleep(5)
     return True
 

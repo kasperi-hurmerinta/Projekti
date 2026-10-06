@@ -34,6 +34,6 @@ def new_game():
 
     Player.current_player = Player(screen_name, player_id)
 
-    print("Kuulet kuulutuksen: lentosi lähtee pian. Valitse oikea lento lentotaulusta. Kello on 7.32, ja kone nousee ilmaan jo 12 minuutin kuluttua!")
+    print("Kuulet kuulutuksen: lentosi lähtee pian. Valitse oikea lento lentotaulusta. Kello on 7.32, ja kone nousee ilmaan jo 13 minuutin kuluttua!")
 
     game_loop()

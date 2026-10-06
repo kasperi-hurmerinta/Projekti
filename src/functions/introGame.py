@@ -29,7 +29,7 @@ def intro_game():
     sleep(1.5)
     print("Missä minä olen? Kädessäsi on viinapullo.")
     sleep(1.5)
-    print("Minulla on kiire, pitää äkkiä päästä lennolle! Portti sulkeutuu 12 minuutin päästä.")
+    print("Minulla on kiire, pitää äkkiä päästä lennolle! Portti sulkeutuu 13 minuutin päästä.")
     sleep(1.5)
     print("Nyt pitää mennä!")
 

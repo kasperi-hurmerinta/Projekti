@@ -1,8 +1,6 @@
 import sys
 import os
 
-from functions.gameLoop import *
-
 src_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 
 if src_path not in sys.path:

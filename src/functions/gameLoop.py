@@ -111,7 +111,7 @@ def departure_gate(kohde):
     print(lentokone)
     sleep(1.5)
     print("Seuraavaksi pääset suorittamaan tehtäviä eri lentokentillä.")
-    print("Jokaisesta tehtävästä saat 22 pistettä. Kerää vähintään 150 pistettä, niin voitat pelin ennen viimeistä lentokenttää! \n")
+    print("Jokaisesta tehtävästä saat 15 pistettä. Kerää vähintään 150 pistettä, niin voitat pelin ennen viimeistä lentokenttää! \n")
     sleep(5)
     return True
 
@@ -134,10 +134,10 @@ def question_randomizer():
         elif vastaus == str(kysymys["oikea_vastaus"] + 1):
             print(f"Oikein! Sait {kysymys['pisteet']} pistettä! \n")
             Player.current_player.addScore(kysymys["pisteet"])
-            sleep(3)
+            sleep(1.5)
         else:
             print("Väärin! Et saanut pisteitä. \n")
-            sleep(3)
+            sleep(1.5)
 
     return True
 

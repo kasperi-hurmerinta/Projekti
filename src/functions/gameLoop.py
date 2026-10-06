@@ -5,6 +5,12 @@ import random
 from time import sleep
 from database.database_connection import database_connect as connection
 
+
+lentokone = f"""
+             __|__
+      --o--o--(_)--o--o--
+"""
+
 def game_loop():
     route = random.choice(list(flightroutes.keys()))
     Player.current_player.setRoute(route)
@@ -70,6 +76,7 @@ def game():
         next_location = route_list[index + 1]
         seuraava_lentokentan_nimi = icaokoodi_lentokentaksi(next_location)
         print(f"Lennetään seuraavaksi kohteeseen {seuraava_lentokentan_nimi}...\n")
+        print(lentokone+'\n')
         player.setLocation(next_location)
         sleep(3)
 
@@ -89,11 +96,6 @@ def departure_gate(kohde):
     ║ AY 532     ║ Oulu                 ║ 08:21    ║ 6        ║ ODOTTAA    ║
     ║ {'FI 847':<11}║ {icaokoodi_maaksi(kohde):<21}║ {'07:45':<9}║ {satunnainen_numero:<9}║ {'PORTILLA':<11}║
     ╚════════════╩══════════════════════╩══════════╩══════════╩════════════╝
-    """
-
-    lentokone = f"""
-                 __|__
-          --o--o--(_)--o--o--
     """
 
     sleep(1.5)
